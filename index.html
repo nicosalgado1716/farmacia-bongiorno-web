@@ -1155,6 +1155,10 @@ async function submitOrder() {
       body: JSON.stringify(pedido)
     });
     const data = await res.json();
+    if (data.error) {
+      showStockError();
+      return;
+    }
     const orderId = data.id_pedido || 'PED-' + Date.now().toString().slice(-6);
     showSuccess(orderId, email);
     cart = [];
